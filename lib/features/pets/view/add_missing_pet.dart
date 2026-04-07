@@ -1,8 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:whisker_trail/features/pets/model/pet.dart';
 
-class AddMissingPet extends StatelessWidget {
+class AddMissingPet extends StatefulWidget {
   const AddMissingPet({super.key});
+
+  @override
+  State<AddMissingPet> createState() => _AddMissingPetState();
+}
+
+class _AddMissingPetState extends State<AddMissingPet> {
+  final TextEditingController _nameController = TextEditingController();
+
+  saveResults() {
+    if (_nameController.text.isNotEmpty) {
+      return Navigator.pop(context, Pet(name: _nameController.text));
+    } else {
+      return null;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -14,11 +29,11 @@ class AddMissingPet extends StatelessWidget {
           child: Column(
         children: [
           Text("Add missing pet details form goes here"),
-          ElevatedButton(
-              onPressed: () {
-                Navigator.pop(context, Pet(name: "Tom"));
-              },
-              child: Text("Save"))
+          TextField(
+            controller: _nameController,
+            decoration: InputDecoration(labelText: "Name"),
+          ),
+          ElevatedButton(onPressed: saveResults, child: Text("Save"))
         ],
       )),
     );

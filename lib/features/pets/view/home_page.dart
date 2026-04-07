@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:whisker_trail/features/pets/model/pet.dart';
 import 'package:whisker_trail/features/pets/view/add_missing_pet.dart';
 import 'package:whisker_trail/features/pets/viewmodel/pet_viewmodel.dart';
+import 'package:whisker_trail/features/pets/widgets/pet_card.dart';
 import 'package:whisker_trail/main.dart';
 import 'package:provider/provider.dart';
 
@@ -27,10 +28,10 @@ class _HomePageState extends State<HomePage> {
                   itemBuilder: (BuildContext context, int index) {
                     return Container(
                       height: 50,
-                      child: Center(child: Text(vm.pets[index].name)),
+                      child: Center(child: PetCard(pet: vm.pets[index])),
                     );
                   })
-              : Text("Nothing to display")),
+              : Text("Nothing to see here 🐈‍⬛...")),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           Pet? result = await Navigator.push(
